@@ -71,7 +71,7 @@
   <div id="now"></div>
 
   <div class="counter-display">
-    <input id="counter" type="number" value="000" readonly />
+    <input id="counter" type="number" value="0" readonly />
     <span>日目</span>
   </div>
 
@@ -107,10 +107,10 @@
   // カウンター操作
   const counter = document.getElementById('counter');
   document.getElementById('plus').onclick = () => {
-    counter.value = String(Number(counter.value) + 1).padStart(3,'0');
+    counter.value = String(Number(counter.value) + 1);
   };
   document.getElementById('minus').onclick = () => {
-    counter.value = String(Math.max(0, Number(counter.value) - 1)).padStart(3,'0');
+    counter.value = String(Math.max(0, Number(counter.value) - 1));
   };
 </script>
 
