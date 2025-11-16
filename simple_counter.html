@@ -5,91 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>日付・時刻・カウンター</title>
   <style>
-    body {
-      font-family: sans-serif;
+    html, body {
       margin: 0;
       padding: 0;
-      height: 100vh;
+      height: 100%;
+      width: 100%;
+      font-family: sans-serif;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
+      flex-direction: column;
     }
-    .section {
-      margin-bottom: 20px;
-      font-size: 2rem;
+
+    #today, #now {
+      font-size: 10vw; /* 画面幅に応じたサイズ */
+      margin: 0;
     }
+
     .counter-box {
+      margin-top: 5vh;
       display: flex;
       align-items: center;
-      gap: 20px;
-      font-size: 2rem;
+      justify-content: center;
+      gap: 5vw;
+      font-size: 10vw;
     }
+
     input[type="number"] {
-      width: 120px;
-      font-size: 2rem;
-      text-align: right;
+      width: 20vw;
+      text-align: center;
+      font-size: 10vw;
     }
+
     button {
-      font-size: 2rem;
-      padding: 10px 20px;
+      font-size: 10vw;
+      padding: 1vw 3vw;
+    }
+
+    span {
+      font-size: 10vw;
     }
   </style>
 </head>
 <body>
-  <div class="section">
-    <div id="today"></div>
-    <div id="now"></div>
-  </div>
-
-  <div class="section counter-box">
-    <button id="minus">-</button>
-    <input id="counter" type="number" value="0" />
-    <button id="plus">+</button>
-    <span>日目</span>
-  </div>
-
-  <script>
-    function updateDate() {
-      const now = new Date();
-      const w = ['日','月','火','水','木','金','土'];
-      const y = now.getFullYear();
-      const m = now.getMonth() + 1;
-      const d = now.getDate();
-      const day = w[now.getDay()];
-      document.getElementById('today').textContent = `${y}/${m}/${d}(${day})`;
-    }
-
-    function updateTime() {
-      const now = new Date();
-      const h = now.getHours();
-      const min = now.getMinutes();
-      document.getElementById('now').textContent = `${h}:${min}`;
-    }
-
-    updateDate();
-    updateTime();
-    setInterval(updateTime, 1000 * 10); // 10秒に1回更新
-
-    function updateTime() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const min = String(now.getMinutes()).padStart(2, '0');
-      document.getElementById('now').textContent = `${h}:${min}`;
-    }
-
-    updateDate();
-    updateTime();
-    setInterval(updateTime, 1000 * 10); // 10秒に1回更新
-
-    const counter = document.getElementById('counter');
-    document.getElementById('plus').onclick = () => {
-      counter.value = String(Number(counter.value) + 1).padStart(3, '0');
-    };
-    document.getElementById('minus').onclick = () => {
-      counter.value = String(Math.max(0, Number(counter.value) - 1)).padStart(3, '0');
-    };
-  </script>
-</body>
-</html>
+  <div id="toda
