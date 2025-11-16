@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日付・時刻・カウンター</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 上部: 日付・時刻, 下部: カウンター */
+    align-items: center;
+    text-align: center;
+    background: #fff;
+  }
+
+  #date-time {
+    margin-top: 5vh;
+  }
+
+  #today, #now {
+    font-size: 8vw; /* 画面幅に応じて拡大 */
+    margin: 1vh 0;
+  }
+
+  .counter-box {
+    display: flex;
+    align-items: center;
+    gap: 5vw;
+    margin-bottom: 5vh;
+    font-size: 8vw;
+  }
+
+  input[type="number"] {
+    width: 15vw;
+    font-size: 8vw;
+    text-align: center;
+    -moz-appearance: textfield; /* Firefoxで上下矢印非表示 */
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Chromeで上下矢印非表示 */
+    margin: 0;
+  }
+
+  button {
+    font-size: 8vw;
+    padding: 2vw 4vw;
+  }
+
+  span {
+    font-size: 8vw;
+  }
+</style>
+</head>
+<body>
+
+<div id="date-time">
+  <div id="today"></div>
+  <div id="now"></div>
+</div>
+
+<div class="counter-box">
+  <button id="minus">-</button>
+  <input id="counter" type="number" value="0" readonly />
+  <button id="plus">+</button>
+  <span>日目</span>
+</div>
+
+<script>
+  function updateDate() {
+    const now = new Date();
+    const w = ['日','月','火','水','木','金','土'];
+    const y = now.getFullYear();
+    const m = now.getMonth() + 1;
+    const d = now.getDate();
+    const day = w[now.getDay()];
+    document.getElementById('today').textContent = `${y}/${m}/${d}(${day})`;
+  }
+
+  function updateTime() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const min = String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('now').textContent = `${h}:${min}`;
+  }
+
+  // 初期表示
+  updateDate();
+  updateTime();
+  setInterval(updateTime, 10000); // 10秒ごとに時刻更新
+
+  // カウンター操作
+  const counter = document.getElementById('counter');
+  document.getElementById('plus').onclick = () => {
+    counter.value = String(Number(counter.value) + 1).padStart(3,'0');
+  };
+  document.getElementById('minus').onclick = () => {
+    counter.value = String(Math.max(0, Number(counter.value) - 1)).padStart(3,'0');
+  };
+</script>
+
+</body>
+</html>
