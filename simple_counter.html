@@ -49,4 +49,45 @@
   </style>
 </head>
 <body>
-  <div id="toda
+  <div id="today"></div>
+  <div id="now"></div>
+
+  <div class="counter-box">
+    <button id="minus">-</button>
+    <input id="counter" type="number" value="0" />
+    <button id="plus">+</button>
+    <span>日目</span>
+  </div>
+
+  <script>
+    function updateDate() {
+      const now = new Date();
+      const w = ['日','月','火','水','木','金','土'];
+      const y = now.getFullYear();
+      const m = now.getMonth() + 1;
+      const d = now.getDate();
+      const day = w[now.getDay()];
+      document.getElementById('today').textContent = `${y}/${m}/${d}(${day})`;
+    }
+
+    function updateTime() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const min = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('now').textContent = `${h}:${min}`;
+    }
+
+    updateDate();
+    updateTime();
+    setInterval(updateTime, 10000); // 10秒ごとに更新
+
+    const counter = document.getElementById('counter');
+    document.getElementById('plus').onclick = () => {
+      counter.value = String(Number(counter.value) + 1).padStart(3, '0');
+    };
+    document.getElementById('minus').onclick = () => {
+      counter.value = String(Math.max(0, Number(counter.value) - 1)).padStart(3, '0');
+    };
+  </script>
+</body>
+</html>
